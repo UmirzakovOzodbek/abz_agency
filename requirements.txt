@@ -1,0 +1,12 @@
+coreapi==2.3.3
+coreschema==0.0.4
+django==4.2.2
+dj-database-url==2.0.0
+django-environ==0.10.0
+django-mptt==0.14.0
+django-seed==0.3.1
+djangorestframework==3.14.0
+drf-yasg==1.21.5
+Pillow==9.5.0
+psycopg2-binary==2.9.6
+Faker==18.10.1
