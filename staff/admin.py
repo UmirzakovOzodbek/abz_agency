@@ -3,7 +3,7 @@ from .models import Staff
 
 
 @admin.register(Staff)
-class BbAdmin (admin. ModelAdmin) :
+class BbAdmin (admin. ModelAdmin):
     list_display = ('first_name', 'last_name', 'patronymic',)
 
     list_filter = (

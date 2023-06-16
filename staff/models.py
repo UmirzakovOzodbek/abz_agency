@@ -67,7 +67,6 @@ class Staff(MPTTModel):
         verbose_name_plural = 'Сотрудники'
 
     def save(self, *args, **kwargs):
-        self.__create_image_watermark()
         return super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
@@ -80,20 +79,3 @@ class Staff(MPTTModel):
                     children.parent = new_parent
                 Staff.objects.bulk_update(childrens, ['parent'])
         return super().delete(*args, **kwargs)
-
-    def __create_image_watermark(instance):
-        if instance.image:
-            image = Image.open(instance.image)
-            watermark = image.copy()
-            watermark = watermark.resize(
-                (image.width//5, image.height//5),
-                Image.ANTIALIAS
-            )
-            image.paste(watermark, (image.width-watermark.width,
-                        image.height-watermark.height))
-            name = instance.image.field.generate_filename(
-                instance, instance.image.name)
-            instance.image.name = instance.image.storage.save(
-                name, instance.image.file, max_length=instance.image.field.max_length)
-            setattr(instance, instance.image.field.attname, instance.image.name)
-            instance.image._committed = True
